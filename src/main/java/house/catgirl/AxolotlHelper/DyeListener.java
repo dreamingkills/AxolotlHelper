@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 public class DyeListener implements Listener {
     @EventHandler
     public void onAxolotlClick(PlayerInteractEntityEvent event) {
-        if(event.getRightClicked().getType() != EntityType.AXOLOTL) return;
+        if (event.getRightClicked().getType() != EntityType.AXOLOTL) return;
 
         Axolotl axolotl = ((Axolotl) event.getRightClicked());
         Axolotl.Variant variant = axolotl.getVariant();
@@ -20,21 +20,17 @@ public class DyeListener implements Listener {
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
         Material itemType = item.getType();
 
-        if(itemType == Material.BLUE_DYE) {
-            axolotl.setVariant(Axolotl.Variant.BLUE);
-        } else if (itemType == Material.CYAN_DYE) {
-            axolotl.setVariant(Axolotl.Variant.CYAN);
-        } else if (itemType == Material.YELLOW_DYE) {
-            axolotl.setVariant(Axolotl.Variant.GOLD);
-        } else if (itemType == Material.PINK_DYE) {
-            axolotl.setVariant(Axolotl.Variant.LUCY);
-        } else if (itemType == Material.BROWN_DYE) {
-            axolotl.setVariant(Axolotl.Variant.WILD);
+        switch (itemType) {
+            case BLUE_DYE -> axolotl.setVariant(Axolotl.Variant.BLUE);
+            case CYAN_DYE -> axolotl.setVariant(Axolotl.Variant.CYAN);
+            case YELLOW_DYE -> axolotl.setVariant(Axolotl.Variant.GOLD);
+            case PINK_DYE -> axolotl.setVariant(Axolotl.Variant.LUCY);
+            case BROWN_DYE -> axolotl.setVariant(Axolotl.Variant.WILD);
         }
 
         boolean isChanged = variant != axolotl.getVariant();
-        boolean isCreative = event.getPlayer().getGameMode().equals(GameMode.CREATIVE);
+        boolean isCreative = event.getPlayer().getGameMode() == GameMode.CREATIVE;
 
-        if(isChanged && !isCreative) item.setAmount(item.getAmount() - 1);
+        if (isChanged && !isCreative) item.setAmount(item.getAmount() - 1);
     }
 }
