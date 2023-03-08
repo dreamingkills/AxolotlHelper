@@ -1,5 +1,5 @@
 name: AxolotlHelper
-version: 1.0
+version: 1.1
 main: house.catgirl.AxolotlHelper.AxolotlHelper
 description: Prevents axolotls from taking dehydration damage and adds the ability to dye them.
-api-version: '1.19'
+api-version: 1.17
